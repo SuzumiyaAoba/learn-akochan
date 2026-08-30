@@ -2,7 +2,19 @@
 
 本書は、Akochan を起動して自己対局・ログ解析・MJAI 連携を行うときの実行モデルを説明します。対局の状態、イベント、二段階行動、外部プロトコルを先に説明し、OS や実装ファイルに依存する事項は「実装対応」と「実装上の境界」に分けます。
 
-AI が候補を作る仕組みと確率評価は [akochan-architecture.md](akochan-architecture.md)、[04-ai-search-and-decision.md](04-ai-search-and-decision.md)、[05-models-evaluation-and-parameters.md](05-models-evaluation-and-parameters.md)を参照してください。
+AI が候補を作る仕組みと確率評価は [01-overview.md](01-overview.md)、[03-ai-search-and-decision.md](03-ai-search-and-decision.md)、[04-models-evaluation-and-parameters.md](04-models-evaluation-and-parameters.md) を参照してください。
+
+## この章のゴール
+
+読み終えたら、次のことを説明できるようになることを目指します。
+
+- 自己対局、ログ確認、標準入出力、一手 API、MJAI TCP の使い分け
+- イベント列を受け取り、判断点で 1 または 2 イベントを返す流れ
+- 設定・固定パラメータ・実行基準ディレクトリが起動に与える影響
+
+前提は [全体像](01-overview.md) とイベント列の考え方です。局面・合法性の前提を確認したい場合は、先に [02-state-rules-scoring.md](02-state-rules-scoring.md) の 1〜3 節を読んでください。ビルド操作そのものは、変更していない [akochan/readme_jpn.md](../akochan/readme_jpn.md) を参照します。
+
+AI がどの候補を選ぶかを知りたい場合は [03-ai-search-and-decision.md](03-ai-search-and-decision.md)、確率と順位評価を知りたい場合は [04-models-evaluation-and-parameters.md](04-models-evaluation-and-parameters.md) へ戻ってください。
 
 ## 1. 実行モデル
 
@@ -27,7 +39,7 @@ Akochan の実行環境は、候補生成・確率評価・行動選択を担う
 
 アダプタが判断コアを参照でき、設定と固定パラメータが同じ実行基準位置から解決できることが実行の前提です。依存ライブラリ、並列実行機能、OS とバイナリ互換性が一致しない場合は、判断前に起動へ失敗します。
 
-OS 別の生成手順、成果物の名前、依存ライブラリの確認は [akochan/readme_jpn.md](../akochan/readme_jpn.md) を参照してください。ここではビルド操作ではなく、判断コアと実行アダプタの配置関係だけを扱います。
+OS 別の生成手順、成果物の名前、依存ライブラリの確認は [akochan/readme_jpn.md](../akochan/readme_jpn.md)（日本語）または [akochan/readme.md](../akochan/readme.md)（英語）を参照してください。英語版には自己対局の補足があります。ここではビルド操作ではなく、判断コアと実行アダプタの配置関係だけを扱います。
 
 ### 2.2 実行前の確認
 

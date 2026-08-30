@@ -4,6 +4,16 @@
 
 固定重みの学習方法と外部 MJAI サーバーの検証は対象外です。実装固有の近似・上限・未使用設定は「実装上の境界」にまとめます。
 
+## この章のゴール
+
+読み終えたら、次のことを説明できるようになることを目指します。
+
+- 合法な打牌・鳴き・槓・和了を候補グラフへ組み立てる流れ
+- DP と非 DP、攻撃とベタオリを同じ将来価値で比較する考え方
+- `pt_exp_total` の順に候補を並べ、現在のイベントへ出力する流れ
+
+前提は [全体像](01-overview.md) と、[02-state-rules-scoring.md](02-state-rules-scoring.md) の局面・待ち・合法手です。確率式を詳しく追う段階では [04-models-evaluation-and-parameters.md](04-models-evaluation-and-parameters.md) を併読し、実際のイベント入出力は [05-runtime-and-mjai.md](05-runtime-and-mjai.md) で確認してください。
+
 ## 1. 意思決定の全体像
 
 AI は、判断点までのイベントを再生して局面を作り、次の順で候補を比較します。
